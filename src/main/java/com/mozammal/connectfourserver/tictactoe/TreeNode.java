@@ -15,12 +15,11 @@ public class TreeNode {
   }
 
   public Character[][] copy() {
-    Character [][] ch = new Character[boardHeight][boardWidth];
-    for (int i=0;i<boardHeight;i++)
-      for (int j=0;j<boardWidth;j++)
-        ch[i][j] = boards[i][j];
+    Character[][] ch = new Character[boardHeight][boardWidth];
+    for (int i = 0; i < boardHeight; i++)
+      for (int j = 0; j < boardWidth; j++) ch[i][j] = boards[i][j];
 
-      return ch;
+    return ch;
   }
 
   public String toString() {

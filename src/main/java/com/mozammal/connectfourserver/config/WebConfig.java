@@ -23,12 +23,9 @@ public class WebConfig {
 
     final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     final CorsConfiguration config = new CorsConfiguration();
-    config.setAllowedOrigins(
-            Collections.singletonList(properties.getFrontendUrl()));
-    config.setAllowedHeaders(
-            Arrays.asList("Origin", "Content-Type", "Accept"));
-    config.setAllowedMethods(
-            Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
+    config.setAllowedOrigins(Collections.singletonList(properties.getFrontendUrl()));
+    config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept"));
+    config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
     config.setAllowCredentials(true);
     source.registerCorsConfiguration("/**", config);
     return new CorsFilter(source);

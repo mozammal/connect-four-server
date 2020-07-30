@@ -34,7 +34,7 @@ public class Connect4GameEngine {
         if (maxScoreByComputer < scoreByComputer) {
           boardGeneratedByMAxScore = treeNode.copy();
           maxScoreByComputer = scoreByComputer;
-         // if (maxScoreByComputer == 1) break;
+          // if (maxScoreByComputer == 1) break;
           //  System.out.println("win: (" + j + "," + i + ")");
         }
 

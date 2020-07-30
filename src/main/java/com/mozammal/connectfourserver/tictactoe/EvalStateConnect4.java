@@ -10,6 +10,7 @@ public enum EvalStateConnect4 {
   EvalStateConnect4(int currentEvalPoint) {
     this.currentEvalPoint = currentEvalPoint;
   }
+
   public int getCurrentEvalPoint() {
     return currentEvalPoint;
   }
