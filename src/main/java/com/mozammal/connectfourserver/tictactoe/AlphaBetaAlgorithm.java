@@ -19,7 +19,7 @@ public class AlphaBetaAlgorithm implements Algorithm {
 
   @Override
   public int execute() {
-    return alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, 8);
+    return alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, 4);
   }
 
   private int alphaBetaSearch(int alpha, int beta, boolean player, int depth) {

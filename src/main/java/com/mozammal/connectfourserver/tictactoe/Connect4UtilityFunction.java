@@ -1,5 +1,6 @@
 package com.mozammal.connectfourserver.tictactoe;
 
+import com.mozammal.connectfourserver.model.Board;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -44,7 +45,9 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
       for (int k = boardHeight - 1; k > j; k--) {
         if (boards[k][i].equals(c)) {
           cntRow++;
-          if (cntRow == 4) return 2;
+          if (cntRow == 4) {
+            return 2;
+          }
         } else if (!boards[k][i].equals(c)) {
           cntRow = 0;
         }
@@ -59,7 +62,10 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
           cntColumn = 0;
         } else if (boards[i][j].equals(c)) {
           cntColumn++;
-          if (cntColumn == 4) return 2;
+          if (cntColumn == 4) {
+
+            return 2;
+          }
         }
       }
     }
@@ -143,6 +149,12 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
         }
       }
     }
+    /*  if (cntEmptyCell > 0) {
+      log.info("mon0 ");
+      Board board = new Board();
+      board.setBoard(boards);
+      board.printBoard();
+    }*/
 
     return cntEmptyCell > 0 ? 0 : 1;
   }
