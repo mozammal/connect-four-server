@@ -4,6 +4,9 @@ import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Data
 public class AlphaBetaAlgorithm implements Algorithm {
 
@@ -19,7 +22,12 @@ public class AlphaBetaAlgorithm implements Algorithm {
 
   @Override
   public int execute() {
-    return alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, 4);
+    List<Integer> triedDepths = Arrays.asList(1, 4, 7);
+    int mxExpectation = Integer.MIN_VALUE;
+    for (int depth : triedDepths)
+      mxExpectation =
+          Math.max(mxExpectation, alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, 4));
+    return mxExpectation;
   }
 
   private int alphaBetaSearch(int alpha, int beta, boolean player, int depth) {
