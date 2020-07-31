@@ -22,7 +22,7 @@ public class AlphaBetaAlgorithm implements Algorithm {
 
   @Override
   public int execute() {
-    List<Integer> triedDepths = Arrays.asList(1, 4, 7);
+    List<Integer> triedDepths = Arrays.asList(1, 4, 8);
     int mxExpectation = Integer.MIN_VALUE;
     for (int depth : triedDepths)
       mxExpectation =
