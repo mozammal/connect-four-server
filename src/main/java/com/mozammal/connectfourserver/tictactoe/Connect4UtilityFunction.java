@@ -13,11 +13,11 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
 
   @Override
   public int score() {
-    int score = scoreEvaluatorForXOrO('O');
+    int score = checkAll(treeNode.getBoards(), 'O');
     if (score == 2) {
       return EvalStateConnect4.WIN.getCurrentEvalPoint();
     }
-    score = scoreEvaluatorForXOrO('X');
+    score = checkAll(treeNode.getBoards(), 'X');
     if (score == 2) {
       return EvalStateConnect4.LOSE.getCurrentEvalPoint();
     } else if (score == 0) {
@@ -25,6 +25,89 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
     } else {
       return EvalStateConnect4.DRAW.getCurrentEvalPoint();
     }
+  }
+
+  int checkVertical(Character[][] board, Character ch) {
+    // Check only if row is 3 or greater
+    for (int r = 3; r < 6; r++) {
+      for (int c = 0; c < 7; c++) {
+        if (board[r][c] != null && board[r][c] == ch) {
+          if (board[r][c] == board[r - 1][c]
+              && board[r][c] == board[r - 2][c]
+              && board[r][c] == board[r - 3][c]) {
+            return 2;
+          }
+        }
+      }
+    }
+    return 0;
+  }
+
+  int checkHorizontal(Character[][] board, Character ch) {
+    // Check only if column is 3 or less
+    for (int r = 0; r < 6; r++) {
+      for (int c = 0; c < 4; c++) {
+        if (board[r][c] != null && board[r][c] == ch) {
+          if (board[r][c] == board[r][c + 1]
+              && board[r][c] == board[r][c + 2]
+              && board[r][c] == board[r][c + 3]) {
+            return board[r][c];
+          }
+        }
+      }
+    }
+    return 0;
+  }
+
+  int checkDiagonalRight(Character[][] board, Character ch) {
+    // Check only if row is 3 or greater AND column is 3 or less
+    for (int r = 3; r < 6; r++) {
+      for (int c = 0; c < 4; c++) {
+        if (board[r][c] != null && board[r][c] == ch) {
+          if (board[r][c] == board[r - 1][c + 1]
+              && board[r][c] == board[r - 2][c + 2]
+              && board[r][c] == board[r - 3][c + 3]) {
+            return 2;
+          }
+        }
+      }
+    }
+    return 0;
+  }
+
+  int checkDiagonalLeft(Character[][] board, Character ch) {
+    // Check only if row is 3 or greater AND column is 3 or greater
+    for (int r = 3; r < 6; r++) {
+      for (int c = 3; c < 7; c++) {
+        if (board[r][c] != null && board[r][c] == ch) {
+          if (board[r][c] == board[r - 1][c - 1]
+              && board[r][c] == board[r - 2][c - 2]
+              && board[r][c] == board[r - 3][c - 3]) {
+            return board[r][c];
+          }
+        }
+      }
+    }
+    return 0;
+  }
+
+  int checkDraw(Character[][] board, Character ch) {
+    for (int r = 0; r < 6; r++) {
+      for (int c = 0; c < 7; c++) {
+        if (board[r][c] != null) {
+          return 0;
+        }
+      }
+    }
+    return 1;
+  }
+
+  int checkAll(Character[][] board, Character ch) {
+    if (this.checkVertical(board, ch) > 1
+        || this.checkDiagonalRight(board, ch) > 0
+        || this.checkDiagonalLeft(board, ch) > 0
+        || this.checkHorizontal(board, ch) > 0) return 2;
+    return checkDraw(board, ch);
   }
 
   private int scoreEvaluatorForXOrO(Character c) {

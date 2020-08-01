@@ -22,12 +22,15 @@ public class AlphaBetaAlgorithm implements Algorithm {
 
   @Override
   public int execute() {
-    List<Integer> triedDepths = Arrays.asList(1, 2, 3, 4, 6, 8);
+    List<Integer> triedDepths = Arrays.asList(1, 12);
     int mxExpectation = Integer.MIN_VALUE;
     for (int depth : triedDepths)
       mxExpectation =
-          Math.max(mxExpectation, alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, depth));
+          Math.max(
+              mxExpectation, alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, depth));
     return mxExpectation;
+
+    // return alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, 12);
   }
 
   private int alphaBetaSearch(int alpha, int beta, boolean player, int depth) {
