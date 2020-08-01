@@ -1,3 +1,4 @@
+/*
 package com.mozammal.connectfourserver.tictactoe;
 
 import com.mozammal.connectfourserver.model.Board;
@@ -116,10 +117,12 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
           } else cntDiagonal++;
           if (cntDiagonal == 4) {
             // log.info("yes2 ");
-            /*  Board board = new Board();
+            */
+/*  Board board = new Board();
             board.setBoard(boards);
             board.printBoard();
-            log.info("yes2 ");*/
+            log.info("yes2 ");*//*
+
             return 2;
           }
         }
@@ -149,13 +152,16 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
         }
       }
     }
-    /*  if (cntEmptyCell > 0) {
+    */
+/*  if (cntEmptyCell > 0) {
       log.info("mon0 ");
       Board board = new Board();
       board.setBoard(boards);
       board.printBoard();
-    }*/
+    }*//*
+
 
     return cntEmptyCell > 0 ? 0 : 1;
   }
 }
+*/

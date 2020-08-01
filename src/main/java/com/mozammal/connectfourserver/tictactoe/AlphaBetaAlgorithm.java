@@ -26,7 +26,7 @@ public class AlphaBetaAlgorithm implements Algorithm {
     int mxExpectation = Integer.MIN_VALUE;
     for (int depth : triedDepths)
       mxExpectation =
-          Math.max(mxExpectation, alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, 4));
+          Math.max(mxExpectation, alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, depth));
     return mxExpectation;
   }
 
