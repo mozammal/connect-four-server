@@ -4,9 +4,6 @@ import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Data
 public class AlphaBetaAlgorithm implements Algorithm {
 
@@ -22,38 +19,33 @@ public class AlphaBetaAlgorithm implements Algorithm {
 
   @Override
   public int execute() {
-  /*  List<Integer> triedDepths = Arrays.asList(1, 8);
-    int mxExpectation = Integer.MIN_VALUE;
-    for (int depth : triedDepths)
-      mxExpectation =
-          Math.max(
-              mxExpectation, alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, depth));
-    return mxExpectation;*/
 
-     return alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, 8);
+    return alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, 10);
   }
 
   private int alphaBetaSearch(int alpha, int beta, boolean player, int depth) {
 
     int currentScore = gameUtilityFunction.score();
-   /* if (currentScore != 0) {
-      return currentScore;
-    }*/
+
     if (depth == 0) return currentScore;
+    Character[][] board = treeNode.getGameBoard().getBoard();
 
     for (int i = 0; i < 7; i++) {
       int j = 5;
-      for (; j >= 0 && treeNode.getBoards()[j][i] != null; j--) ;
+      for (; j >= 0 && board[j][i] != null; j--) ;
       if (j < 0) continue;
-      if (treeNode.getBoards()[j][i] == null) {
-        if (player) treeNode.getBoards()[j][i] = 'O';
-        else treeNode.getBoards()[j][i] = 'X';
+      if (board[j][i] == null) {
+        if (player) {
+          board[j][i] = 'O';
+        } else {
+          board[j][i] = 'X';
+        }
         if (player) {
           alpha = Math.max(alpha, alphaBetaSearch(alpha, beta, false, depth - 1));
         } else {
           beta = Math.min(beta, alphaBetaSearch(alpha, beta, true, depth - 1));
         }
-        treeNode.getBoards()[j][i] = null;
+        board[j][i] = null;
         if (player && alpha >= beta) return alpha;
         if (!player && beta <= alpha) return beta;
       }

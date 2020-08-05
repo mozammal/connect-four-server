@@ -1,54 +1,52 @@
 package com.mozammal.connectfourserver.tictactoe;
 
-import com.mozammal.connectfourserver.model.Board;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.mozammal.connectfourserver.model.GameBoard;
+import lombok.extern.slf4j.Slf4j;
 
+import static com.mozammal.connectfourserver.config.GameConfig.MAX_SCORE_THRESHOLD;
+
+@Slf4j
 public class Connect4GameEngine {
+
   private static final int BOARD_SIZE_ROW = 6;
 
   private static final int BOARD_SIZE_COLUMN = 7;
-  private static Logger logger = LoggerFactory.getLogger(Connect4GameEngine.class);
 
-  private enum TicTacToGameStateForComputer {
-    WIN,
-    DRAW
-  }
+  public GameBoard TicTacToePlayedByComputer(GameBoard gameBoard) {
 
-  public Board TicTacToePlayedByComputer(Board board) {
-
-    boolean isSolutionFound = false;
     TreeNode treeNode = new TreeNode(BOARD_SIZE_ROW, BOARD_SIZE_COLUMN);
-    treeNode.setBoards(board.copy());
+    treeNode.setGameBoard(gameBoard);
     Algorithm algorithm = new AlphaBetaAlgorithm(treeNode);
-    Character[][] boardGeneratedByMAxScore = treeNode.copy();
+    Character[][] board = treeNode.getGameBoard().getBoard();
+    Character[][] boardGeneratedByMAxScore = board;
     int maxScoreByComputer = Integer.MIN_VALUE;
+
     for (int i = 0; i < BOARD_SIZE_COLUMN; i++) {
       int j = BOARD_SIZE_ROW - 1;
-      for (; j >= 0 && treeNode.getBoards()[j][i] != null; j--) ;
+      for (; j >= 0 && board[j][i] != null; j--) ;
       if (j < 0) continue;
 
-      if (treeNode.getBoards()[j][i] == null) {
-        treeNode.getBoards()[j][i] = 'O';
+      if (board[j][i] == null) {
+        board[j][i] = 'O';
         int score = ((AlphaBetaAlgorithm) algorithm).getGameUtilityFunction().score();
-        if (score == 100000000) {
-          boardGeneratedByMAxScore = treeNode.copy();
-          treeNode.getBoards()[j][i] = null;
+
+        if (score == MAX_SCORE_THRESHOLD) {
+          boardGeneratedByMAxScore = gameBoard.copy();
+          board[j][i] = null;
           break;
         }
+
         int scoreByComputer = algorithm.execute();
+
         if (maxScoreByComputer < scoreByComputer) {
-          boardGeneratedByMAxScore = treeNode.copy();
+          boardGeneratedByMAxScore = gameBoard.copy();
           maxScoreByComputer = scoreByComputer;
-          // if (maxScoreByComputer == 1) break;
-          //  System.out.println("win: (" + j + "," + i + ")");
         }
 
-        treeNode.getBoards()[j][i] = null;
+        board[j][i] = null;
       }
     }
-    board.setBoard(boardGeneratedByMAxScore);
-    // board.printBoard();
-    return board;
+    gameBoard.setBoard(boardGeneratedByMAxScore);
+    return gameBoard;
   }
 }

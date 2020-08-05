@@ -1,7 +1,7 @@
 package com.mozammal.connectfourserver.web;
 
 import com.mozammal.connectfourserver.config.Connect4;
-import com.mozammal.connectfourserver.model.Board;
+import com.mozammal.connectfourserver.model.GameBoard;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,10 +32,10 @@ public class GameWebController {
 
   @MessageMapping("/emit.game.event")
   public void findNextMoveByComputer(
-      @Payload Board board, @Header("simpSessionId") String sessionId) {
-    Board nextBoard = gameEventHandler.findNextMoveByComputer(board);
+          @Payload GameBoard gameBoard, @Header("simpSessionId") String sessionId) {
+    GameBoard nextGameBoard = gameEventHandler.findNextMoveByComputer(gameBoard);
     this.template.convertAndSendToUser(
-        sessionId, properties.getBroker() + "/game.event", nextBoard, createHeaders(sessionId));
+        sessionId, properties.getBroker() + "/game.event", nextGameBoard, createHeaders(sessionId));
   }
 
   private MessageHeaders createHeaders(String sessionId) {

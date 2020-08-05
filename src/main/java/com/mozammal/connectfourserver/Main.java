@@ -1,7 +1,7 @@
 
 package com.mozammal.connectfourserver;
 
-import com.mozammal.connectfourserver.model.Board;
+import com.mozammal.connectfourserver.model.GameBoard;
 import com.mozammal.connectfourserver.tictactoe.Connect4UtilityFunction;
 import com.mozammal.connectfourserver.tictactoe.TreeNode;
 import com.mozammal.connectfourserver.web.GameEventHandler;
@@ -12,11 +12,12 @@ public class Main {
 
   public static void main(String[] args) {
     GameEventHandler gameEventHandler = new GameEventHandler();
-    Board board = new Board();
-    Character[][] boards = board.getBoard();
+    GameBoard gameBoard = new GameBoard();
+
     Scanner in = new Scanner(System.in);
 
     while (true) {
+      Character[][] boards = gameBoard.getBoard();
       int col = in.nextInt();
       for (int i = 5; i >= 0; i--) {
         if (boards[i][col] == null) {
@@ -24,17 +25,17 @@ public class Main {
           break;
         }
       }
-      System.out.println("Board after your input: ");
-      board.printBoard();
+      System.out.println("GameBoard after your input: ");
+      gameBoard.printBoard();
 
-      boards = gameEventHandler.findNextMoveByComputer(board).copy();
-      board.setBoard(boards);
+      gameBoard = gameEventHandler.findNextMoveByComputer(gameBoard);
+     // gameBoard.setBoard(boards);
       TreeNode treeNode = new TreeNode(6, 7);
-      treeNode.setBoards(boards);
+      treeNode.setGameBoard(gameBoard);
       Connect4UtilityFunction gameUtilityFunction = new Connect4UtilityFunction(treeNode);
       int currentScore = gameUtilityFunction.score();
-      System.out.println("Board after computer moved: ");
-      board.printBoard();
+      System.out.println("GameBoard after computer moved: ");
+      gameBoard.printBoard();
       if (currentScore == -2) {
         System.out.println("LOSE");
         break;
