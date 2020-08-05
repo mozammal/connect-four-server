@@ -33,8 +33,8 @@ public class AlphaBetaAlgorithm implements Algorithm {
     if (depth == 0) return currentScore;
     Character[][] board = treeNode.getGameBoard().getBoard();
 
-    for (int i = 0; i < 7; i++) {
-      int j = 5;
+    for (int i = 0; i < board[0].length; i++) {
+      int j = board.length;
       for (; j >= 0 && board[j][i] != null; j--) ;
       if (j < 0) continue;
       if (board[j][i] == null) {
