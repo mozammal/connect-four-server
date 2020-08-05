@@ -1,15 +1,19 @@
 package com.mozammal.connectfourserver.tictactoe;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Slf4j
 @Data
 public class AlphaBetaAlgorithm implements Algorithm {
 
-  private static final Logger logger = LoggerFactory.getLogger(AlphaBetaAlgorithm.class);
+
+  private static final int SEARCH_DEPTH = 9;
 
   private TreeNode treeNode;
+
   private GameUtilityFunction gameUtilityFunction;
 
   public AlphaBetaAlgorithm(TreeNode treeNode) {
@@ -19,8 +23,7 @@ public class AlphaBetaAlgorithm implements Algorithm {
 
   @Override
   public int execute() {
-
-    return alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, 10);
+    return alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, SEARCH_DEPTH);
   }
 
   private int alphaBetaSearch(int alpha, int beta, boolean player, int depth) {
