@@ -34,7 +34,7 @@ public class AlphaBetaAlgorithm implements Algorithm {
     Character[][] board = treeNode.getGameBoard().getBoard();
 
     for (int i = 0; i < board[0].length; i++) {
-      int j = board.length;
+      int j = board.length-1;
       for (; j >= 0 && board[j][i] != null; j--) ;
       if (j < 0) continue;
       if (board[j][i] == null) {
