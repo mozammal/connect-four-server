@@ -13,18 +13,35 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
 
   @Override
   public int score() {
-    int score = checkAll(treeNode.getBoards(), 'O');
-    if (score == 2) {
-      return EvalStateConnect4.WIN.getCurrentEvalPoint();
+    int scoreByComputer = scoreEvaluatorForXOrO('O');
+    int scoreByHuman = scoreEvaluatorForXOrO('X');
+    if (scoreByHuman >= 10000000)
+      return -100000000;
+
+    // if (scoreByHuman == Integer.MAX_VALUE) return Integer.MIN_VALUE;
+    // if (scoreByComputer == Integer.MAX_VALUE) return Integer.MIN_VALUE;
+
+    return scoreByComputer - scoreByHuman;
+
+    // Character[][] boards = treeNode.getBoards();
+
+    /* int cntEmptyCell = 0;
+    for (int i = 0; i < boards.length; i++) {
+      for (int j = 0; j < boards[0].length; j++) {
+        if (boards[i][j] == null) {
+          cntEmptyCell++;
+        }
+      }
     }
-    score = checkAll(treeNode.getBoards(), 'X');
-    if (score == 2) {
+    return cntEmptyCell > 0 ? 0 : 1;*/
+
+    /*  if (score == 2) {
       return EvalStateConnect4.LOSE.getCurrentEvalPoint();
     } else if (score == 0) {
       return EvalStateConnect4.ONGOING.getCurrentEvalPoint();
     } else {
       return EvalStateConnect4.DRAW.getCurrentEvalPoint();
-    }
+    }*/
   }
 
   int checkVertical(Character[][] board, Character ch) {
@@ -119,6 +136,7 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
     int cntRow;
     int cntColumn;
     int cntDiagonal;
+    int two = 0, three = 0, four = 0;
 
     for (int i = 0; i < boardWidth; i++) {
       int j = boardHeight - 1;
@@ -128,9 +146,10 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
       for (int k = boardHeight - 1; k > j; k--) {
         if (boards[k][i].equals(c)) {
           cntRow++;
-          if (cntRow == 4) {
-            return 2;
-          }
+          if (cntRow == 2) two++;
+          if (cntRow == 3) three++;
+          if (cntRow == 4) four++;
+
         } else if (!boards[k][i].equals(c)) {
           cntRow = 0;
         }
@@ -145,10 +164,9 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
           cntColumn = 0;
         } else if (boards[i][j].equals(c)) {
           cntColumn++;
-          if (cntColumn == 4) {
-
-            return 2;
-          }
+          if (cntColumn == 2) two++;
+          if (cntColumn == 3) three++;
+          if (cntColumn == 4) four++;
         }
       }
     }
@@ -163,48 +181,10 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
           if (boards[k][l] == null || !boards[k][l].equals(c)) {
             cntDiagonal = 0;
           } else cntDiagonal++;
-          if (cntDiagonal == 4) {
 
-            // log.info("yes0 ");
-            return 2;
-          }
-        }
-      }
-    }
-
-    for (int i = 0; i < boardHeight; i++) {
-      for (int j = 0; j < boardWidth; j++) {
-        cntDiagonal = 0;
-        if (boards[i][j] == null) continue;
-        for (int k = i, l = j; k < boardHeight && l >= 0; k++, l--) {
-          if (boards[k][l] == null || !boards[k][l].equals(c)) {
-            cntDiagonal = 0;
-          } else cntDiagonal++;
-          if (cntDiagonal == 4) {
-
-            return 2;
-          }
-        }
-      }
-    }
-
-    for (int i = 0; i < boardHeight; i++) {
-      for (int j = 0; j < boardWidth; j++) {
-        cntDiagonal = 0;
-        boolean canContinue = true;
-        if (boards[i][j] == null) continue;
-        for (int k = i, l = j; k >= 0 && l < boardHeight; k--, l++) {
-          if (boards[k][l] == null || !boards[k][l].equals(c)) {
-            cntDiagonal = 0;
-          } else cntDiagonal++;
-          if (cntDiagonal == 4) {
-            // log.info("yes2 ");
-            /*  Board board = new Board();
-            board.setBoard(boards);
-            board.printBoard();
-            log.info("yes2 ");*/
-            return 2;
-          }
+          if (cntDiagonal == 2) two++;
+          if (cntDiagonal == 3) three++;
+          if (cntDiagonal == 4) four++;
         }
       }
     }
@@ -217,21 +197,22 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
           if (boards[k][l] == null || !boards[k][l].equals(c)) {
             cntDiagonal = 0;
           } else cntDiagonal++;
-          if (cntDiagonal == 4) {
-            // log.info("yes3 ");
-            return 2;
-          }
+          if (cntDiagonal == 2) two++;
+          if (cntDiagonal == 3) three++;
+          if (cntDiagonal == 4) four++;
         }
       }
     }
 
-    for (int i = 0; i < boardHeight; i++) {
+    return two * 10 + three * 1000 + four * 10000000;
+
+    /*for (int i = 0; i < boardHeight; i++) {
       for (int j = 0; j < boardWidth; j++) {
         if (boards[i][j] == null) {
           cntEmptyCell++;
         }
       }
-    }
+    }*/
     /*  if (cntEmptyCell > 0) {
       log.info("mon0 ");
       Board board = new Board();
@@ -239,6 +220,6 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
       board.printBoard();
     }*/
 
-    return cntEmptyCell > 0 ? 0 : 1;
+    // return cntEmptyCell > 0 ? 0 : 1;
   }
 }

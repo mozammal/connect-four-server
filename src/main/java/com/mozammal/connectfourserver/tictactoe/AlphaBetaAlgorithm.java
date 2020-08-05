@@ -22,23 +22,23 @@ public class AlphaBetaAlgorithm implements Algorithm {
 
   @Override
   public int execute() {
-    List<Integer> triedDepths = Arrays.asList(1, 12);
+  /*  List<Integer> triedDepths = Arrays.asList(1, 8);
     int mxExpectation = Integer.MIN_VALUE;
     for (int depth : triedDepths)
       mxExpectation =
           Math.max(
               mxExpectation, alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, depth));
-    return mxExpectation;
+    return mxExpectation;*/
 
-    // return alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, 12);
+     return alphaBetaSearch(Integer.MIN_VALUE, Integer.MAX_VALUE, false, 8);
   }
 
   private int alphaBetaSearch(int alpha, int beta, boolean player, int depth) {
 
     int currentScore = gameUtilityFunction.score();
-    if (currentScore != 0) {
+   /* if (currentScore != 0) {
       return currentScore;
-    }
+    }*/
     if (depth == 0) return currentScore;
 
     for (int i = 0; i < 7; i++) {
