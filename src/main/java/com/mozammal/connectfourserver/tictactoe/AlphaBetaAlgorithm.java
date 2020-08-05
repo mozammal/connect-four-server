@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 public class AlphaBetaAlgorithm implements Algorithm {
 
 
-  private static final int SEARCH_DEPTH = 9;
+  private static final int SEARCH_DEPTH = 8;
 
   private TreeNode treeNode;
 
