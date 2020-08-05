@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  connectfour-game:
+    container_name: connectfour-game-server-container
+    image: connectfour-game-server
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /data/connectfour-game-server
+    ports:
+      - '8080:8080'
