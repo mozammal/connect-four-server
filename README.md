@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/mozammal/connect-four-server.svg?branch=master)](https://travis-ci.org/mozammal/connect-four-server)
 ## connect four web socket server in spring boot 
 ## Algorithm: Alpha Beta pruning with simple heuristic for evaluation function 
 
