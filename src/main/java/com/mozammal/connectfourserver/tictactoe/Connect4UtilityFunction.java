@@ -17,6 +17,8 @@ public class Connect4UtilityFunction implements GameUtilityFunction {
     int scoreByHuman = scoreEvaluatorForXOrO('X');
     if (scoreByHuman >= 10000000)
       return -100000000;
+    if (scoreByComputer >= 10000000)
+      return 100000000;
 
     // if (scoreByHuman == Integer.MAX_VALUE) return Integer.MIN_VALUE;
     // if (scoreByComputer == Integer.MAX_VALUE) return Integer.MIN_VALUE;
