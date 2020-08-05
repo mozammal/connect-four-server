@@ -30,6 +30,12 @@ public class Connect4GameEngine {
 
       if (treeNode.getBoards()[j][i] == null) {
         treeNode.getBoards()[j][i] = 'O';
+        int score = ((AlphaBetaAlgorithm) algorithm).getGameUtilityFunction().score();
+        if (score == 100000000) {
+          boardGeneratedByMAxScore = treeNode.copy();
+          treeNode.getBoards()[j][i] = null;
+          break;
+        }
         int scoreByComputer = algorithm.execute();
         if (maxScoreByComputer < scoreByComputer) {
           boardGeneratedByMAxScore = treeNode.copy();
