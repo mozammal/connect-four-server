@@ -35,9 +35,6 @@ public class AlphaBetaAlgorithm implements Algorithm {
 
     if (depth == 0) return currentScore;
     Character[][] board = treeNode.getGameBoard().getBoard();
-    /*List<Integer> indexes = IntStream.range(0, board[0].length)
-            .boxed().collect(Collectors.toList());
-    Collections.shuffle(indexes);*/
 
     for (int i=0; i<board[0].length; i++) {
       int j = board.length-1;
