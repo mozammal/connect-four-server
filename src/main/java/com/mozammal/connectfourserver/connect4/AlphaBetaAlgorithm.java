@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static com.mozammal.connectfourserver.config.GameConfig.MAX_SCORE_THRESHOLD;
+import static com.mozammal.connectfourserver.config.GameConfig.MINIMUM_SCORE_THRESHOLD;
+
 @Slf4j
 @Data
 public class AlphaBetaAlgorithm implements Algorithm {
@@ -32,6 +35,9 @@ public class AlphaBetaAlgorithm implements Algorithm {
   private int alphaBetaSearch(int alpha, int beta, boolean player, int depth) {
 
     int currentScore = gameUtilityFunction.score();
+    if (currentScore == MAX_SCORE_THRESHOLD
+        || currentScore == MINIMUM_SCORE_THRESHOLD)
+      return currentScore;
 
     if (depth == 0) return currentScore;
     Character[][] board = treeNode.getGameBoard().getBoard();
