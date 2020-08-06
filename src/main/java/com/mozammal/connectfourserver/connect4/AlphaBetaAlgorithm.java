@@ -1,9 +1,12 @@
-package com.mozammal.connectfourserver.tictactoe;
+package com.mozammal.connectfourserver.connect4;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Slf4j
 @Data
@@ -32,8 +35,11 @@ public class AlphaBetaAlgorithm implements Algorithm {
 
     if (depth == 0) return currentScore;
     Character[][] board = treeNode.getGameBoard().getBoard();
+    List<Integer> indexes = IntStream.range(0, board[0].length)
+            .boxed().collect(Collectors.toList());
+    Collections.shuffle(indexes);
 
-    for (int i = 0; i < board[0].length; i++) {
+    for (int i: indexes) {
       int j = board.length-1;
       for (; j >= 0 && board[j][i] != null; j--) ;
       if (j < 0) continue;

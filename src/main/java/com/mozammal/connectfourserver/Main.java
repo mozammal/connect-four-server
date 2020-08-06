@@ -2,8 +2,8 @@
 package com.mozammal.connectfourserver;
 
 import com.mozammal.connectfourserver.model.GameBoard;
-import com.mozammal.connectfourserver.tictactoe.Connect4UtilityFunction;
-import com.mozammal.connectfourserver.tictactoe.TreeNode;
+import com.mozammal.connectfourserver.connect4.Connect4UtilityFunction;
+import com.mozammal.connectfourserver.connect4.TreeNode;
 import com.mozammal.connectfourserver.web.GameEventHandler;
 
 import java.util.Scanner;
@@ -29,7 +29,6 @@ public class Main {
       gameBoard.printBoard();
 
       gameBoard = gameEventHandler.findNextMoveByComputer(gameBoard);
-     // gameBoard.setBoard(boards);
       TreeNode treeNode = new TreeNode(6, 7);
       treeNode.setGameBoard(gameBoard);
       Connect4UtilityFunction gameUtilityFunction = new Connect4UtilityFunction(treeNode);

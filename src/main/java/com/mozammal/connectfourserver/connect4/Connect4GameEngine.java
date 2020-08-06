@@ -1,4 +1,4 @@
-package com.mozammal.connectfourserver.tictactoe;
+package com.mozammal.connectfourserver.connect4;
 
 import com.mozammal.connectfourserver.model.GameBoard;
 import lombok.extern.slf4j.Slf4j;

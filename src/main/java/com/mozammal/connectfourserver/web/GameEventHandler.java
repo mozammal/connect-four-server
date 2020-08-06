@@ -1,7 +1,7 @@
 package com.mozammal.connectfourserver.web;
 
 import com.mozammal.connectfourserver.model.GameBoard;
-import com.mozammal.connectfourserver.tictactoe.Connect4GameEngine;
+import com.mozammal.connectfourserver.connect4.Connect4GameEngine;
 import org.springframework.stereotype.Component;
 
 @Component
