@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 public class AlphaBetaAlgorithm implements Algorithm {
 
 
-  private static final int SEARCH_DEPTH = 8;
+  private static final int SEARCH_DEPTH = 10;
 
   private TreeNode treeNode;
 
