@@ -27,7 +27,7 @@ public class AlphaBetaAlgorithm implements Algorithm {
 
   @Override
   public int execute() {
-    List<Integer> depths = Arrays.asList(2, 8);
+    List<Integer> depths = Arrays.asList(1, 8);
     OptionalInt max =
         depths.stream()
             .mapToInt(
