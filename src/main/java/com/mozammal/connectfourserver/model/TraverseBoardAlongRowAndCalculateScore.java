@@ -15,19 +15,23 @@ public class TraverseBoardAlongRowAndCalculateScore implements CalculateScore {
 
       for (int j = 0; j < boards[0].length; j++) {
         if (boards[i][j] == null || !boards[i][j].equals(ch)) {
-          if (cntColumn == 2) {
-            two++;
-          } else if (cntColumn == 3) {
-            three++;
-          } else if (cntColumn == 4) {
-            four++;
-          }
           cntColumn = 0;
         } else if (boards[i][j].equals(ch)) {
           cntColumn++;
         }
+        if (cntColumn == 2) {
+          two++;
+        } else if (cntColumn == 3) {
+          three++;
+        } else if (cntColumn == 4) {
+          four++;
+        }
       }
     }
-    return ScoreTuple.builder().numberOfTwo(two).numberOfThree(three).numberOfFour(four).build();
+    return ScoreTuple.builder().
+            numberOfTwo(two).
+            numberOfThree(three).
+            numberOfFour(four).
+            build();
   }
 }

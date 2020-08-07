@@ -15,25 +15,23 @@ public class TraverseBoardAlongLowerDiagonalAndCalculateScore implements Calcula
         if (boards[i][j] == null) continue;
         for (int k = i, l = j; k >= 0 && l >= 0; k--, l--) {
           if (boards[k][l] == null || !boards[k][l].equals(ch)) {
-            switch (cntDiagonal) {
-              case 2:
-                two++;
-                break;
-              case 3:
-                three++;
-                break;
-              case 4:
-                four++;
-                break;
-              default:
-            }
             cntDiagonal = 0;
-          } else {
-            cntDiagonal++;
+          } else cntDiagonal++;
+
+          if (cntDiagonal == 2) {
+            two++;
+          } else if (cntDiagonal == 3) {
+            three++;
+          } else if (cntDiagonal == 4) {
+            four++;
           }
         }
       }
     }
-    return ScoreTuple.builder().numberOfTwo(two).numberOfThree(three).numberOfFour(four).build();
+    return ScoreTuple.builder().
+            numberOfTwo(two).
+            numberOfThree(three).
+            numberOfFour(four).
+            build();
   }
 }

@@ -20,17 +20,21 @@ public class TraverseBoardAlongColumnAndCalculateScore implements CalculateScore
           cntRow++;
 
         } else if (!boards[k][i].equals(ch)) {
-          if (cntRow == 2) {
-            two++;
-          } else if (cntRow == 3) {
-            three++;
-          } else if (cntRow == 4) {
-            four++;
-          }
           cntRow = 0;
+        }
+        if (cntRow == 2) {
+          two++;
+        } else if (cntRow == 3) {
+          three++;
+        } else if (cntRow == 4) {
+          four++;
         }
       }
     }
-    return ScoreTuple.builder().numberOfTwo(two).numberOfThree(three).numberOfFour(four).build();
+    return ScoreTuple.builder().
+            numberOfTwo(two).
+            numberOfThree(three).
+            numberOfFour(four).
+            build();
   }
 }

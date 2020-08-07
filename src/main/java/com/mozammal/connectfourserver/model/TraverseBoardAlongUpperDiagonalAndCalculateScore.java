@@ -16,18 +16,19 @@ public class TraverseBoardAlongUpperDiagonalAndCalculateScore implements Calcula
         if (boards[i][j] == null) continue;
 
         for (int k = i, l = j; k < boards.length && l < boards[0].length; k++, l++) {
+          if (cntDiagonal == 2) {
+            two++;
+          } else if (cntDiagonal == 3) {
+            three++;
+          } else if (cntDiagonal == 4) {
+            four++;
+          }
           if (boards[k][l] == null || !boards[k][l].equals(ch)) {
-            if (cntDiagonal == 2) {
-              two++;
-            } else if (cntDiagonal == 3) {
-              three++;
-            } else if (cntDiagonal == 4) {
-              four++;
-            }
             cntDiagonal = 0;
           } else {
             cntDiagonal++;
           }
+
         }
       }
     }
