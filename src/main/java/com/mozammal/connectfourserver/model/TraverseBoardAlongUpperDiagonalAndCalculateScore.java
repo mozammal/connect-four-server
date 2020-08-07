@@ -17,22 +17,20 @@ public class TraverseBoardAlongUpperDiagonalAndCalculateScore implements Calcula
 
         for (int k = i, l = j; k < boards.length && l < boards[0].length; k++, l++) {
           if (boards[k][l] == null || !boards[k][l].equals(ch)) {
+            if (cntDiagonal == 2) {
+              two++;
+            } else if (cntDiagonal == 3) {
+              three++;
+            } else if (cntDiagonal == 4) {
+              four++;
+            }
             cntDiagonal = 0;
-          } else cntDiagonal++;
-
-          if (cntDiagonal == 2) {
-            two++; }
-          if (cntDiagonal == 3) { three++; };
-          if (cntDiagonal == 4) {
-            four++;
+          } else {
+            cntDiagonal++;
           }
         }
       }
     }
-    return ScoreTuple.builder().
-            numberOfTwo(two).
-            numberOfThree(three).
-            numberOfFour(four).
-            build();
+    return ScoreTuple.builder().numberOfTwo(two).numberOfThree(three).numberOfFour(four).build();
   }
 }
